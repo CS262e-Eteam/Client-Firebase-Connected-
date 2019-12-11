@@ -5,7 +5,6 @@ Main - provides a framework for the app that includes the app bar containing the
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:lab09/pages/Splashscreen.dart';
 import 'package:lab09/pages/edit_item.dart';
 import 'package:lab09/pages/filter_list.dart';
 import 'package:lab09/pages/home_page.dart';
@@ -21,11 +20,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        home: new SplashScreen());
+        home: new HomeScreen());
   }
 }
 
 class HomeScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

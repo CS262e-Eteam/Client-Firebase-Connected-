@@ -21,9 +21,7 @@ dependencies:
     sdk: flutter
   cloud_firestore: ^0.11.0+1
   font_awesome_flutter: 8.5.0
-  material_search: ^0.2.8
   responsive_grid: ^1.0.1
-
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -52,12 +50,7 @@ flutter:
 
   assets:
     - lib/images/test-img.JPG
-
-    - lib/images/calvin.jpg
-    - lib/images/calvinMPLOGO-forCIRCLE.jpg
-    - lib/images/book.jpeg
     - lib/images/app-logo.jpg
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
