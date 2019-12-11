@@ -1,32 +1,26 @@
 /*
-Main - provides a framework for the app that includes the app bar containing the menu
+Implements a favorite heart that can be selected/deselected and the fill changes based on that
+@params: itemId, int: the itemId which is used to check what display
+                      (favorited or not) to initialize the heart to
  */
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lab09/pages/edit_item.dart';
 import 'package:lab09/pages/filter_list.dart';
-import 'package:lab09/pages/home_page.dart';
-import 'package:lab09/types/item.dart';
-import 'pages/login_page.dart';
-import 'pages/user_settings.dart';
+import 'package:lab09/pages/login_page.dart';
 
-import 'shared/globals.dart' as globals;
-import 'shared/colors.dart' as colors;
+import 'package:lab09/shared/colors.dart' as colors;
+import 'package:lab09/shared/globals.dart' as globals;
 
-void main() => runApp(MyApp());
+class MenuTabs extends StatefulWidget {
+  MenuTabs({Key key}) : super(key: key);
 
-class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-        home: new HomeScreen());
-  }
+  MenuTabsState createState() => MenuTabsState();
 }
 
-class HomeScreen extends StatelessWidget {
-
+class MenuTabsState extends State<MenuTabs> {
   List<Widget> menuTabs(BuildContext context) {
     List<Widget> tabs = [
       DrawerHeader(
@@ -127,19 +121,14 @@ class HomeScreen extends StatelessWidget {
       ),
     );
 //    } else {
-      tabs.add(
-        ListTile(
-          leading: Icon(FontAwesomeIcons.userCircle),
-          title: Text('My Account'),
-          onTap: (){
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              new MaterialPageRoute(builder: (context) => new UserSettings()),
-            );
-          },
-        ),
-      );
+//      tabs.add(
+//        ListTile(
+//          leading: Icon(FontAwesomeIcons.userCircle),
+//          title: Text('My Account'),
+//          onTap: (){//fucntion we need
+//          },
+//        ),
+//      );
 //
 //      tabs.add(
 //        ListTile(
@@ -157,45 +146,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-//      appBar: AppBar(
-//        backgroundColor: colors.grayBlue,
-//        actions: <Widget>[
-//          IconButton(
-//            icon: Icon(Icons.search),
-//            onPressed: () {
-//              showSearch(
-//                context: context,
-//  //                      delegate: CustomSearchDelegate()
-//              );
-//            },
-//          ),
-//        ],
-//      ),
-      drawer: Drawer(
-        child: ListView(
-            padding: EdgeInsets.zero,
-            children: menuTabs(context)
-        ) ,
-      ),
-
-      body: _buildBody(context),
+    return Drawer(
+      child: ListView(
+          padding: EdgeInsets.zero,
+          children: menuTabs(context)
+      ) ,
     );
   }
-
-  Widget _buildBody(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('items').orderBy('createdDate', descending: true).snapshots(),
-      builder: (context, snapshot) {
-        globals.items = [];
-        if (!snapshot.hasData) return LinearProgressIndicator();
-        snapshot.data.documents.forEach((snap) {
-          Item item = Item.fromSnapshot(snap);
-          globals.items.add(item);
-        });
-        return HomePage();
-      },
-    );
-  }
-
 }

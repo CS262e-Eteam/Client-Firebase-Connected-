@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 const darkGrayBlue = const Color(0xff333a44);
 const grayBlue = const Color(0xff466081);
 const lightGrayBlue = const Color(0xff7a8897);
+const lightestGrayBlue = const Color(0xffECECEC);
 const offWhite = const Color(0xfff6f7f9);
 const teal = const Color(0xff72acb4);
 const lightGreen = const Color(0xffa5c672);
