@@ -28,14 +28,22 @@ class MenuTabsState extends State<MenuTabs> {
             color: colors.grayBlue,
           ),
           child: Stack(children: <Widget>[
-            Align(alignment: Alignment.bottomCenter,
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 50.0,
+            Align(alignment: Alignment.center,
+                child: new Container(
+                  width: 90.0,
+                  height: 90.0,
+                  alignment: Alignment.bottomLeft ,
+                  decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: new DecorationImage(
+                          fit: BoxFit.fitHeight,
+                          image: new AssetImage(
+                            'lib/images/calvinMPLOGO-forCIRCLE.jpg',)
+                      )
+                  ),
                 )
             ),
-            Text(globals.appName,
-                style: TextStyle(fontSize: 30) ),
+
           ],)
       ),
       ListTile(
