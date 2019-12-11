@@ -26,164 +26,9 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
-
-  List<Widget> menuTabs(BuildContext context) {
-    List<Widget> tabs = [
-      DrawerHeader(
-          decoration: BoxDecoration(
-
-
-            color: colors.grayBlue,
-          ),
-          child: Stack(children: <Widget>[
-            Align(alignment: Alignment.center,
-                child: new Container(
-                  width: 90.0,
-                  height: 90.0,
-                  alignment: Alignment.bottomLeft ,
-                  decoration: new BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: new DecorationImage(
-                          fit: BoxFit.fitHeight,
-                          image: new AssetImage(
-                            'lib/images/calvinMPLOGO-forCIRCLE.jpg',)
-                      )
-                  ),
-                )
-            ),
-
-          ],)
-      ),
-      ListTile(
-        leading: Icon(Icons.bookmark_border),
-        title: Text('All Items'),
-        onTap: (){
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => new FilterList(filter: "All Items")),
-          );
-        },
-      ),
-      ListTile(
-        leading: Icon(FontAwesomeIcons.bookOpen),
-        title: Text('Textbooks'),
-        onTap: (){
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => new FilterList(filter: "Textbook")),
-          );
-        },
-      ),
-      ListTile(
-        leading: Icon(FontAwesomeIcons.tshirt),
-        title: Text('Clothing'),
-        onTap: (){
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => new FilterList(filter: "Clothing")),
-          );
-        },
-      ),
-      ListTile(
-        leading: Icon(FontAwesomeIcons.heart),
-        title: Text('Favorited Items'),
-        onTap: (){
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => new FilterList(filter: "Favorited")),
-          );
-        },
-      ),
-      ListTile(
-        leading: Icon(FontAwesomeIcons.shirtsinbulk),
-        title: Text('My Items'),
-        onTap: (){
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => new FilterList(filter: "My Items")),
-          );
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.add),
-        title: Text('Add Item'),
-        onTap: (){
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => new ItemForm( item: null )),
-          );
-        },
-      ),
-    ];
-
-//    if (globals.isLoggedIn) {
-    tabs.add(
-      ListTile(
-        leading: Icon(FontAwesomeIcons.userCircle),
-        title: Text('Login'),
-        onTap: () {
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => new LoginPage()),
-          );
-        },
-      ),
-    );
-//    } else {
-//      tabs.add(
-//        ListTile(
-//          leading: Icon(FontAwesomeIcons.userCircle),
-//          title: Text('My Account'),
-//          onTap: (){//fucntion we need
-//          },
-//        ),
-//      );
-//
-//      tabs.add(
-//        ListTile(
-//          leading: Icon(FontAwesomeIcons.doorOpen),
-//          title: Text('Logout'),
-//          onTap: (){//fucntion we need
-//            globals.isLoggedIn = false;
-//          },
-//        ),
-//      );
-//    }
-
-    return tabs;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-//      appBar: AppBar(
-//        backgroundColor: colors.grayBlue,
-//        actions: <Widget>[
-//          IconButton(
-//            icon: Icon(Icons.search),
-//            onPressed: () {
-//              showSearch(
-//                context: context,
-//  //                      delegate: CustomSearchDelegate()
-//              );
-//            },
-//          ),
-//        ],
-//      ),
-      drawer: Drawer(
-        child: ListView(
-            padding: EdgeInsets.zero,
-            children: menuTabs(context)
-        ) ,
-      ),
-
       body: _buildBody(context),
     );
   }
@@ -194,25 +39,13 @@ class HomeScreen extends StatelessWidget {
       builder: (context, snapshot) {
         globals.items = [];
         if (!snapshot.hasData) return LinearProgressIndicator();
-          snapshot.data.documents.forEach((snap) {
-            Item item = Item.fromSnapshot(snap);
-            globals.items.add(item);
-          });
+        snapshot.data.documents.forEach((snap) {
+          Item item = Item.fromSnapshot(snap);
+          globals.items.add(item);
+        });
         return HomePage();
       },
     );
   }
 
-//  @override
-//  Widget build(BuildContext context) {
-//    return new Scaffold(
-//      drawer: Drawer(
-//        child: ListView(
-//            padding: EdgeInsets.zero,
-//            children: menuTabs(context)
-//        ) ,
-//      ),
-//      body: HomePage(),
-//    );
-//  }
 }
