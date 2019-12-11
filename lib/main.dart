@@ -10,6 +10,7 @@ import 'package:lab09/pages/filter_list.dart';
 import 'package:lab09/pages/home_page.dart';
 import 'package:lab09/types/item.dart';
 import 'pages/login_page.dart';
+import 'pages/user_settings.dart';
 
 import 'shared/globals.dart' as globals;
 import 'shared/colors.dart' as colors;
@@ -126,14 +127,19 @@ class HomeScreen extends StatelessWidget {
       ),
     );
 //    } else {
-//      tabs.add(
-//        ListTile(
-//          leading: Icon(FontAwesomeIcons.userCircle),
-//          title: Text('My Account'),
-//          onTap: (){//fucntion we need
-//          },
-//        ),
-//      );
+      tabs.add(
+        ListTile(
+          leading: Icon(FontAwesomeIcons.userCircle),
+          title: Text('My Account'),
+          onTap: (){
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              new MaterialPageRoute(builder: (context) => new UserSettings()),
+            );
+          },
+        ),
+      );
 //
 //      tabs.add(
 //        ListTile(
