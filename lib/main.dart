@@ -5,6 +5,7 @@ Main - provides a framework for the app that includes the app bar containing the
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:lab09/pages/Splashscreen.dart';
 import 'package:lab09/pages/edit_item.dart';
 import 'package:lab09/pages/filter_list.dart';
 import 'package:lab09/pages/home_page.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        home: new HomeScreen());
+        home: new SplashScreen());
   }
 }
 
@@ -30,17 +31,27 @@ class HomeScreen extends StatelessWidget {
     List<Widget> tabs = [
       DrawerHeader(
           decoration: BoxDecoration(
+
+
             color: colors.grayBlue,
           ),
           child: Stack(children: <Widget>[
-            Align(alignment: Alignment.bottomCenter,
-                child: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 50.0,
+            Align(alignment: Alignment.center,
+                child: new Container(
+                  width: 90.0,
+                  height: 90.0,
+                  alignment: Alignment.bottomLeft ,
+                  decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: new DecorationImage(
+                          fit: BoxFit.fitHeight,
+                          image: new AssetImage(
+                            'lib/images/calvinMPLOGO-forCIRCLE.jpg',)
+                      )
+                  ),
                 )
             ),
-            Text(globals.appName,
-                style: TextStyle(fontSize: 30) ),
+
           ],)
       ),
       ListTile(
