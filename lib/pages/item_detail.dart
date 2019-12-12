@@ -170,7 +170,7 @@ class ItemDetailState extends State<ItemDetail> {
                 ) : Container(),
                 widget.item.isOBO ?
                 Container(
-                  width: 50,
+                  width: 120,
                   decoration: BoxDecoration(
                       color: colors.teal,
                       borderRadius: BorderRadius.all(
@@ -180,7 +180,7 @@ class ItemDetailState extends State<ItemDetail> {
                   child: Padding(
                     padding: EdgeInsets.all(6),
                     child: Text (
-                      'OBO',
+                      'Or Best Offer',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 16,

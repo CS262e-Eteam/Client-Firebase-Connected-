@@ -5,6 +5,7 @@ Home Page - shows header and list of most recent items
 import 'package:flutter/material.dart';
 import 'package:lab09/components/menu_tabs.dart';
 import 'package:lab09/components/summary_card.dart';
+import 'package:lab09/pages/search.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import 'package:lab09/shared/globals.dart' as globals;
@@ -62,9 +63,9 @@ class HomePageState extends State<HomePage> {
           actions: <Widget>[
             IconButton(icon: Icon(Icons.search, color: Colors.white),
               onPressed: () {
-                showSearch(
-                  context: context,
-//                delegate: CustomSearchDelegate()
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(builder: (context) => new Search()),
                 );
               },
             )
