@@ -59,6 +59,15 @@ class SearchState extends State<Search> {
       }
     });
 
+    globals.items.forEach((item) {
+      if ((item.condition != null && item.condition.toLowerCase().contains(itemName.text.toLowerCase())) &&
+          (item.iSBN != null && item.iSBN.toLowerCase().contains(itemName.text.toLowerCase())) &&
+          (item.size != null && item.size.toLowerCase().contains(itemName.text.toLowerCase())) &&
+          !foundItems.contains(item)) {
+        foundItems.add(item);
+      }
+    });
+
     foundItems.forEach((item) {
       searchResults.add(SummaryCard(item: item, isSeller: false));
     });
