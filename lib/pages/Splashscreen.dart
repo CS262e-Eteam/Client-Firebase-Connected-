@@ -1,23 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:lab09/pages/edit_item.dart';
-import 'package:lab09/pages/filter_list.dart';
-import 'package:lab09/pages/home_page.dart';
-import 'package:lab09/types/item.dart';
-import 'package:lab09/shared/globals.dart' as globals;
+
 import 'package:lab09/shared/colors.dart' as colors;
-
-
-
+import 'package:lab09/types/item.dart';
+import 'package:lab09/main.dart';
+import 'package:lab09/pages/home_page.dart';
 
 
 import 'dart:async';
 
 import '../main.dart';
-
-
-
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();

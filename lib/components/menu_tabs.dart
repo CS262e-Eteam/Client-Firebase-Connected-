@@ -25,10 +25,10 @@ class MenuTabsState extends State<MenuTabs> {
     List<Widget> tabs = [
       DrawerHeader(
           decoration: BoxDecoration(
-            color: colors.grayBlue,
+            color: Theme.of(context).primaryColor,
           ),
           child: Stack(children: <Widget>[
-            Align(alignment: Alignment.center,
+            Align(alignment: Alignment.bottomCenter,
                 child: new Container(
                   width: 90.0,
                   height: 90.0,
@@ -38,7 +38,7 @@ class MenuTabsState extends State<MenuTabs> {
                       image: new DecorationImage(
                           fit: BoxFit.fitHeight,
                           image: new AssetImage(
-                            'lib/images/calvinMPLOGO-forCIRCLE.jpg',)
+                            'lib/images/calvincircle.jpg',)
                       )
                   ),
                 )
