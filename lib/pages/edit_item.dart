@@ -721,7 +721,7 @@ class ItemFormState extends State<ItemForm> {
                         onTap: () {
                           fDB.collection('items').add(
                               Item(
-                                sellerId: globals.testUser.id,
+                                sellerId: globals.user.reference.documentID,
                                 price: itemCost.text != '' ? int.parse(itemCost.text) : 0,
                                 description: itemDescription.text,
                                 isOBO: itemOBO,

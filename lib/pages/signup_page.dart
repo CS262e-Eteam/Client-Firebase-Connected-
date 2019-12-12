@@ -6,7 +6,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:lab09/types/user.dart';
+
 import 'package:lab09/shared/colors.dart' as colors;
+import 'package:lab09/shared/globals.dart' as globals;
 
 class SignUpPage extends StatefulWidget{
 	@override
@@ -42,8 +45,20 @@ class SignUpPageState extends State<SignUpPage> {
 		} finally {
 			if (user != null) {
 				print(user);
-				Firestore.instance.collection('users').add({
-					'reference': user.uid
+				Firestore.instance.collection('users').document(user.uid).setData({
+					'username': usernameCreate.text,
+					'email': emailCreate.text,
+					'favoritedItems': [''],
+					'postedItems': ['']
+				});
+
+				Firestore.instance.collection('users').document(user.uid).get().then((snapshot) {
+					if (snapshot != null) {
+						globals.user = User.fromSnapshot(snapshot);
+					}
+
+					Navigator.pop(context);
+					Navigator.pop(context);
 				});
 			}
 		}
@@ -175,8 +190,6 @@ class SignUpPageState extends State<SignUpPage> {
 					child:Text("Sign Up"),
 					color: colors.teal,
 					onPressed: (){
-						Navigator.pop(context);
-						Navigator.pop(context);
 						signUpWithEmail();
 					}
 				)

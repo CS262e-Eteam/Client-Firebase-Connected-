@@ -22,18 +22,18 @@ class FavoriteHeart extends StatefulWidget {
 class FavoriteHeartState extends State<FavoriteHeart> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return globals.user != null ? GestureDetector(
         onTap: () {
-          if (globals.testUser.favoritedItems.contains(widget.itemId)) {
-            globals.testUser.favoritedItems.remove(widget.itemId);
+          if (globals.user.favoritedItems.contains(widget.itemId)) {
+            globals.user.favoritedItems.remove(widget.itemId);
           } else {
-            globals.testUser.favoritedItems.add(widget.itemId);
+            globals.user.favoritedItems.add(widget.itemId);
           }
           setState(() {});
         },
         child: Container(
             alignment: Alignment.bottomRight,
-            child: globals.testUser.favoritedItems.contains(widget.itemId) ?
+            child: globals.user.favoritedItems.contains(widget.itemId) ?
             Icon(
               FontAwesomeIcons.solidHeart,
               color: colors.lightestBerry,
@@ -42,6 +42,6 @@ class FavoriteHeartState extends State<FavoriteHeart> {
                 FontAwesomeIcons.heart
             )
         )
-    );
+    ) : Container();
   }
 }

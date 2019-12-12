@@ -36,8 +36,8 @@ class ItemDetailState extends State<ItemDetail> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget> [
-                  Text(globals.testUser.userName + " can be contacted at:"),
-                  Text(globals.testUser.email),
+                  Text(globals.user.username + " can be contacted at:"),
+                  Text(globals.user.email),
                   FlatButton(
                     child: const Text("OKAY"),
                     onPressed: () {

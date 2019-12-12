@@ -21,8 +21,8 @@ class FilterListState extends State<FilterList> {
 
     List<Widget> summaryCards = [];
     globals.items.forEach((item) {
-      if ((this.widget.filter == "Favorited" && globals.testUser.favoritedItems.contains(item.reference.documentID)) ||
-          (this.widget.filter == "My Items" && (globals.testUser.id == item.sellerId)) ||
+      if ((this.widget.filter == "Favorited" && globals.user.favoritedItems.contains(item.reference.documentID)) ||
+          (this.widget.filter == "My Items" && (globals.user.reference.documentID == item.sellerId)) ||
           item.category == this.widget.filter ||
           this.widget.filter == "All Items") {
         summaryCards.add(SummaryCard(item: item, isSeller: this.widget.filter == "My Items"));
