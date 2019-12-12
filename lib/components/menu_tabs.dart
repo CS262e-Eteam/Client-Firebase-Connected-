@@ -83,56 +83,24 @@ class MenuTabsState extends State<MenuTabs> {
           );
         },
       ),
-      ListTile(
-        leading: Icon(FontAwesomeIcons.heart),
-        title: Text('Favorited Items'),
-        onTap: (){
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => new FilterList(filter: "Favorited")),
-          );
-        },
-      ),
-      ListTile(
-        leading: Icon(FontAwesomeIcons.shirtsinbulk),
-        title: Text('My Items'),
-        onTap: (){
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => new FilterList(filter: "My Items")),
-          );
-        },
-      ),
-      ListTile(
-        leading: Icon(Icons.add),
-        title: Text('Add Item'),
-        onTap: (){
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => new ItemForm( item: null )),
-          );
-        },
-      ),
     ];
 
 //    if (globals.isLoggedIn) {
-    tabs.add(
-      ListTile(
-        leading: Icon(FontAwesomeIcons.userCircle),
-        title: Text('Login'),
-        onTap: () {
-          Navigator.pop(context);
-          Navigator.push(
-            context,
-            new MaterialPageRoute(builder: (context) => new LoginPage()),
-          );
-        },
-      ),
-    );
-//    } else {
+    if (globals.user == null) {
+      tabs.add(
+        ListTile(
+          leading: Icon(FontAwesomeIcons.userCircle),
+          title: Text('Login'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              new MaterialPageRoute(builder: (context) => new LoginPage()),
+            );
+          },
+        ),
+      );
+    } else {
 //      tabs.add(
 //        ListTile(
 //          leading: Icon(FontAwesomeIcons.userCircle),
@@ -142,16 +110,60 @@ class MenuTabsState extends State<MenuTabs> {
 //        ),
 //      );
 //
-//      tabs.add(
-//        ListTile(
-//          leading: Icon(FontAwesomeIcons.doorOpen),
-//          title: Text('Logout'),
-//          onTap: (){//fucntion we need
-//            globals.isLoggedIn = false;
-//          },
-//        ),
-//      );
-//    }
+
+      tabs.add(
+        ListTile(
+          leading: Icon(FontAwesomeIcons.heart),
+          title: Text('Favorited Items'),
+          onTap: (){
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              new MaterialPageRoute(builder: (context) => new FilterList(filter: "Favorited")),
+            );
+          },
+        ),
+      );
+      tabs.add(
+        ListTile(
+          leading: Icon(FontAwesomeIcons.shirtsinbulk),
+          title: Text('My Items'),
+          onTap: (){
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              new MaterialPageRoute(builder: (context) => new FilterList(filter: "My Items")),
+            );
+          },
+        ),
+      );
+      tabs.add(
+        ListTile(
+          leading: Icon(Icons.add),
+          title: Text('Add Item'),
+          onTap: (){
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              new MaterialPageRoute(builder: (context) => new ItemForm( item: null )),
+            );
+          },
+        ),
+      );
+      tabs.add(
+        ListTile(
+          leading: Icon(FontAwesomeIcons.doorOpen),
+          title: Text('Logout'),
+          onTap: (){//fucntion we need
+            globals.user = null;
+            Navigator.push(
+              context,
+              new MaterialPageRoute(builder: (context) => new HomePage())
+            );
+          },
+        ),
+      );
+    }
 
     return tabs;
   }
