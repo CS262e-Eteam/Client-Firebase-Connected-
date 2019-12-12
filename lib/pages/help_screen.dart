@@ -38,7 +38,14 @@ To Buy an item:\n
 1. Find the item you wish to buy\n
 2. Click on the item\n
 3. Then click on Contact Seller at the bottom of the page.\n
-4. Use the contact information to contact the seller (outside the app)\n""";
+4. Use the contact information to contact the seller (outside the app)\n
+To Edit/Delete item\n
+1. Login\n
+2. Open side menu\n
+3. Click on my items\n
+4. Scroll to the item and click on it\n
+5. Edit as desired\n
+6. To delete click on the delete button.\n""";
   @override
   Widget build(BuildContext context) => new Scaffold(
 		appBar: AppBar(
