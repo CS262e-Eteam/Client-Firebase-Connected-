@@ -3,6 +3,7 @@ import 'package:lab09/components/menu_tabs.dart';
 import 'package:lab09/shared/globals.dart' as globals;
 import 'package:lab09/shared/colors.dart' as colors;
 import 'package:lab09/components/summary_card.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 
 class FilterList extends StatefulWidget {
   FilterList({Key key, this.filter}) : super(key: key);
@@ -35,31 +36,37 @@ class FilterListState extends State<FilterList> {
       this.title = this.widget.filter;
     }
 
+    List<ResponsiveGridCol> filterListLayout() {
+      List<ResponsiveGridCol> grid = [];
+
+      summaryCards.forEach((sC) {
+        grid.add(
+            ResponsiveGridCol(
+                xs: 6,
+                child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: sC
+                )
+            )
+        );
+      });
+
+      return grid;
+    }
+
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(this.title),
-        backgroundColor: colors.grayBlue,
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.search, color: Colors.white),
-            onPressed: () {
-              showSearch(
-                context: context,
-//                delegate: CustomSearchDelegate()
-              );
-            },          
-          )
-        ],
-      ),
-      drawer: MenuTabs(),
-      body: new GridView.count(
-        childAspectRatio: .8,
-        primary: false,
-        padding: const EdgeInsets.all(20),
-        crossAxisCount: 2,
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
-        children: summaryCards,
-      )
+        appBar: new AppBar(
+          title: Text(this.widget.filter),
+          backgroundColor: colors.grayBlue,
+        ),
+        drawer: MenuTabs(),
+        body: SingleChildScrollView(
+          child: Container(
+              child: ResponsiveGridRow (
+                children: filterListLayout(),
+              )
+          ),
+        )
     );
   }
 }

@@ -146,7 +146,6 @@ class SearchState extends State<Search> {
         drawer: MenuTabs(),
         body: SingleChildScrollView(
           child: Container(
-              color: colors.lightestGrayBlue,
               child: ResponsiveGridRow (
                 children: homePageLayout(),
               )
