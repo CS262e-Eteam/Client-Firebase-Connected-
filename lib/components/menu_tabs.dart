@@ -10,7 +10,7 @@ import 'package:lab09/pages/edit_item.dart';
 import 'package:lab09/pages/filter_list.dart';
 import 'package:lab09/pages/home_page.dart';
 import 'package:lab09/pages/login_page.dart';
-
+import 'package:lab09/pages/help_screen.dart';
 import 'package:lab09/shared/colors.dart' as colors;
 import 'package:lab09/shared/globals.dart' as globals;
 
@@ -93,7 +93,6 @@ class MenuTabsState extends State<MenuTabs> {
       ),
     ];
 
-//    if (globals.isLoggedIn) {
     if (globals.user == null) {
       tabs.add(
         ListTile(
@@ -109,16 +108,6 @@ class MenuTabsState extends State<MenuTabs> {
         ),
       );
     } else {
-//      tabs.add(
-//        ListTile(
-//          leading: Icon(FontAwesomeIcons.userCircle),
-//          title: Text('My Account'),
-//          onTap: (){//fucntion we need
-//          },
-//        ),
-//      );
-//
-
       tabs.add(
         ListTile(
           leading: Icon(FontAwesomeIcons.heart),
@@ -172,6 +161,20 @@ class MenuTabsState extends State<MenuTabs> {
         ),
       );
     }
+
+    tabs.add(
+      ListTile(
+        leading: Icon(Icons.help),
+        title: Text('Help'),
+        onTap: (){
+          Navigator.pop(context);
+          Navigator.push(
+          context,
+          new MaterialPageRoute(builder: (context) => new HelpPage()),
+          );
+        },
+      ),
+    );
 
     return tabs;
   }
