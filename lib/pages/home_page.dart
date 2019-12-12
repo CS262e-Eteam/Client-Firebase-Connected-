@@ -46,7 +46,7 @@ class HomePageState extends State<HomePage> {
             ResponsiveGridCol(
                 xs: 6,
                 child: Padding(
-                    padding: EdgeInsets.all(15),
+                    padding: EdgeInsets.all(10),
                     child: sC
                 )
             )

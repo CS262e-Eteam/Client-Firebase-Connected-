@@ -2,7 +2,10 @@
 Sign Up Page - allows a user to create an account
  */
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:lab09/shared/colors.dart' as colors;
 
 class SignUpPage extends StatefulWidget{
@@ -24,7 +27,27 @@ class SignUpPageState extends State<SignUpPage> {
 	FocusNode passwordCreateNode = new FocusNode();
 	FocusNode passwordConfirmNode = new FocusNode();
 
+	final FirebaseAuth _auth = FirebaseAuth.instance;
 
+	void signUpWithEmail() async {
+		FirebaseUser user;
+
+		try {
+			AuthResult result = await _auth.createUserWithEmailAndPassword(email: emailCreate.text, password: passwordCreate.text);
+			user = result.user;
+//			AuthResult result = await _auth.signInWithEmailAndPassword(email: emailCreate.text, password: passwordCreate.text);
+//			user = result.user;
+		} catch (e) {
+			print(e.toString());
+		} finally {
+			if (user != null) {
+				print(user);
+				Firestore.instance.collection('users').add({
+					'reference': user.uid
+				});
+			}
+		}
+	}
 
 	@override
 	Widget build(BuildContext context) => new Scaffold(
@@ -45,28 +68,28 @@ class SignUpPageState extends State<SignUpPage> {
 				Padding(
 					padding: EdgeInsets.only(bottom: 15)
 				),
-				Padding(
-					padding: EdgeInsets.symmetric(horizontal: 10),
-					child: TextFormField(
-						controller: usernameCreate,
-						focusNode: usernameCreateNode,
-						validator: (value) {
-							if (value.isEmpty) return "Please enter a Username";
-							return null;
-						},
-						keyboardType: TextInputType.text,
-						cursorColor: colors.lightBerry,
-						decoration: InputDecoration(
-							labelText: "Username",
-							labelStyle: TextStyle(
-								color: usernameCreateNode.hasFocus ? colors.lightBerry : Colors.black
-							),
-							focusedBorder: UnderlineInputBorder(
-								borderSide: BorderSide(color: colors.lightBerry),
-							),
-						),
-					),
-				),
+//				Padding(
+//					padding: EdgeInsets.symmetric(horizontal: 10),
+//					child: TextFormField(
+//						controller: usernameCreate,
+//						focusNode: usernameCreateNode,
+//						validator: (value) {
+//							if (value.isEmpty) return "Please enter a Username";
+//							return null;
+//						},
+//						keyboardType: TextInputType.text,
+//						cursorColor: colors.lightBerry,
+//						decoration: InputDecoration(
+//							labelText: "Username",
+//							labelStyle: TextStyle(
+//								color: usernameCreateNode.hasFocus ? colors.lightBerry : Colors.black
+//							),
+//							focusedBorder: UnderlineInputBorder(
+//								borderSide: BorderSide(color: colors.lightBerry),
+//							),
+//						),
+//					),
+//				),
 				Padding(
 					padding: EdgeInsets.symmetric(horizontal: 10),
 					child: TextFormField(
@@ -111,28 +134,28 @@ class SignUpPageState extends State<SignUpPage> {
 						),
 					),
 				),
-				Padding(
-					padding: EdgeInsets.symmetric(horizontal: 10),
-					child: TextFormField(
-						controller: passwordConfirm,
-						focusNode: passwordConfirmNode,
-						validator: (value) {
-							if (value.isEmpty) return "Please enter a Password";
-							return null;
-						},
-						keyboardType: TextInputType.text,
-						cursorColor: colors.lightBerry,
-						decoration: InputDecoration(
-							labelText: "Confirm Password",
-							labelStyle: TextStyle(
-								color: passwordConfirmNode.hasFocus ? colors.lightBerry : Colors.black
-							),
-							focusedBorder: UnderlineInputBorder(
-								borderSide: BorderSide(color: colors.lightBerry),
-							),
-						),
-					),
-				),
+//				Padding(
+//					padding: EdgeInsets.symmetric(horizontal: 10),
+//					child: TextFormField(
+//						controller: passwordConfirm,
+//						focusNode: passwordConfirmNode,
+//						validator: (value) {
+//							if (value.isEmpty) return "Please enter a Password";
+//							return null;
+//						},
+//						keyboardType: TextInputType.text,
+//						cursorColor: colors.lightBerry,
+//						decoration: InputDecoration(
+//							labelText: "Confirm Password",
+//							labelStyle: TextStyle(
+//								color: passwordConfirmNode.hasFocus ? colors.lightBerry : Colors.black
+//							),
+//							focusedBorder: UnderlineInputBorder(
+//								borderSide: BorderSide(color: colors.lightBerry),
+//							),
+//						),
+//					),
+//				),
 
 				Padding(
 					padding: EdgeInsets.only(bottom: 15)
@@ -154,6 +177,7 @@ class SignUpPageState extends State<SignUpPage> {
 					onPressed: (){
 						Navigator.pop(context);
 						Navigator.pop(context);
+						signUpWithEmail();
 					}
 				)
 			],
