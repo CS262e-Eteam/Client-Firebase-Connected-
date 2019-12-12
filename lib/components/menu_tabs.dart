@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lab09/pages/edit_item.dart';
 import 'package:lab09/pages/filter_list.dart';
+import 'package:lab09/pages/home_page.dart';
 import 'package:lab09/pages/login_page.dart';
 
 import 'package:lab09/shared/colors.dart' as colors;
@@ -37,6 +38,17 @@ class MenuTabsState extends State<MenuTabs> {
             Text(globals.appName,
                 style: TextStyle(fontSize: 30) ),
           ],)
+      ),
+      ListTile(
+        leading: Icon(Icons.home),
+        title: Text('Home'),
+        onTap: (){
+          Navigator.pop(context);
+          Navigator.push(
+            context,
+            new MaterialPageRoute(builder: (context) => new HomePage()),
+          );
+        },
       ),
       ListTile(
         leading: Icon(Icons.bookmark_border),
