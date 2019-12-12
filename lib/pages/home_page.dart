@@ -5,7 +5,9 @@ Home Page - shows header and list of most recent items
 import 'package:flutter/material.dart';
 import 'package:lab09/components/menu_tabs.dart';
 import 'package:lab09/components/summary_card.dart';
+import 'package:lab09/pages/search.dart';
 import 'package:responsive_grid/responsive_grid.dart';
+
 
 import 'package:lab09/shared/globals.dart' as globals;
 import 'package:lab09/shared/colors.dart' as colors;
@@ -46,7 +48,7 @@ class HomePageState extends State<HomePage> {
             ResponsiveGridCol(
                 xs: 6,
                 child: Padding(
-                    padding: EdgeInsets.all(15),
+                    padding: EdgeInsets.all(10),
                     child: sC
                 )
             )
@@ -62,9 +64,9 @@ class HomePageState extends State<HomePage> {
           actions: <Widget>[
             IconButton(icon: Icon(Icons.search, color: Colors.white),
               onPressed: () {
-                showSearch(
-                  context: context,
-//                delegate: CustomSearchDelegate()
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(builder: (context) => new Search()),
                 );
               },
             )

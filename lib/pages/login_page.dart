@@ -2,9 +2,13 @@
 Login Page - allows a user to log in or navigate to sign up page
  */
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:lab09/components/menu_tabs.dart';
 import 'package:lab09/shared/colors.dart' as colors;
+import 'package:lab09/shared/globals.dart' as globals;
+import 'package:lab09/types/user.dart';
 
 import 'signup_page.dart';
 
@@ -28,12 +32,38 @@ class LoginPageState extends State<LoginPage> {
 //  final passwordCreate = TextEditingController();
 //  final passwordConfirm = TextEditingController();
 
+	final FirebaseAuth _auth = FirebaseAuth.instance;
+
+	void login() async {
+		FirebaseUser user;
+
+		try {
+			AuthResult result = await _auth.signInWithEmailAndPassword(email: emailLogin.text, password: passwordLogin.text);
+			user = result.user;
+		} catch (e) {
+			print(e.toString());
+		} finally {
+			if (user != null) {
+				print(user);
+
+				Firestore.instance.collection('users').document(user.uid).get().then((snapshot) {
+					if (snapshot != null) {
+						globals.user = User.fromSnapshot(snapshot);
+					}
+
+					Navigator.pop(context);
+				});
+			}
+		}
+	}
+
   @override
   Widget build(BuildContext context) => new Scaffold(
 		appBar: AppBar(
 			title: Text("Login"),
 			backgroundColor: colors.grayBlue,
 	  ),
+		drawer: MenuTabs(),
 //		body: Form(
 //			key: _formKey,
 //			child: Column(
@@ -112,6 +142,7 @@ class LoginPageState extends State<LoginPage> {
 					child: TextFormField(
 						controller: passwordLogin,
 						focusNode: passwordNode,
+						obscureText: true,
 						validator: (value) {
 							if (value.isEmpty) return "Please enter a Password";
 							return null;
@@ -161,7 +192,7 @@ class LoginPageState extends State<LoginPage> {
 					child:Text("Login"),
 					color: colors.teal,
 					onPressed: (){
-						Navigator.pop(context);
+						login();
 					}
 				),
 				Padding(

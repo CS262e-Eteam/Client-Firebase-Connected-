@@ -2,8 +2,14 @@
 Sign Up Page - allows a user to create an account
  */
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:lab09/types/user.dart';
+
 import 'package:lab09/shared/colors.dart' as colors;
+import 'package:lab09/shared/globals.dart' as globals;
 
 class SignUpPage extends StatefulWidget{
 	@override
@@ -24,7 +30,39 @@ class SignUpPageState extends State<SignUpPage> {
 	FocusNode passwordCreateNode = new FocusNode();
 	FocusNode passwordConfirmNode = new FocusNode();
 
+	final FirebaseAuth _auth = FirebaseAuth.instance;
 
+	void signUpWithEmail() async {
+		FirebaseUser user;
+
+		try {
+			if (passwordCreate.text == passwordConfirm.text) {
+				AuthResult result = await _auth.createUserWithEmailAndPassword(email: emailCreate.text, password: passwordCreate.text);
+				user = result.user;
+			}
+		} catch (e) {
+			print(e.toString());
+		} finally {
+			if (user != null) {
+				print(user);
+				Firestore.instance.collection('users').document(user.uid).setData({
+					'username': usernameCreate.text,
+					'email': emailCreate.text,
+					'favoritedItems': [''],
+					'postedItems': ['']
+				});
+
+				Firestore.instance.collection('users').document(user.uid).get().then((snapshot) {
+					if (snapshot != null) {
+						globals.user = User.fromSnapshot(snapshot);
+					}
+
+					Navigator.pop(context);
+					Navigator.pop(context);
+				});
+			}
+		}
+	}
 
 	@override
 	Widget build(BuildContext context) => new Scaffold(
@@ -92,6 +130,7 @@ class SignUpPageState extends State<SignUpPage> {
 				Padding(
 					padding: EdgeInsets.symmetric(horizontal: 10),
 					child: TextFormField(
+						obscureText: true,
 						controller: passwordCreate,
 						focusNode: passwordCreateNode,
 						validator: (value) {
@@ -114,6 +153,7 @@ class SignUpPageState extends State<SignUpPage> {
 				Padding(
 					padding: EdgeInsets.symmetric(horizontal: 10),
 					child: TextFormField(
+						obscureText: true,
 						controller: passwordConfirm,
 						focusNode: passwordConfirmNode,
 						validator: (value) {
@@ -152,8 +192,7 @@ class SignUpPageState extends State<SignUpPage> {
 					child:Text("Sign Up"),
 					color: colors.teal,
 					onPressed: (){
-						Navigator.pop(context);
-						Navigator.pop(context);
+						signUpWithEmail();
 					}
 				)
 			],

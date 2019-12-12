@@ -3,6 +3,7 @@ Item Detail Page - shows more extensive details about an item and allows a user 
 @params: item, Item: the item whose details to display
  */
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lab09/components/favorite_heart.dart';
 import 'package:lab09/components/property_field.dart';
@@ -12,6 +13,8 @@ import 'package:lab09/shared/globals.dart' as globals;
 import 'package:lab09/types/item.dart';
 
 import 'dart:async';
+
+import 'package:lab09/types/user.dart';
 
 
 class ItemDetail extends StatefulWidget{
@@ -27,17 +30,37 @@ class ItemDetail extends StatefulWidget{
 
 class ItemDetailState extends State<ItemDetail> {
   Future contactSeller() async {
+    User seller = null;
+
+    DocumentSnapshot snap = await Firestore.instance.collection('users').document(this.widget.item.sellerId).get();
+    seller = User.fromSnapshot(snap);
+
     return showDialog<void>(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
+          return seller != null ? AlertDialog(
               title: Text("Contact Seller"),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget> [
-                  Text(globals.testUser.userName + " can be contacted at:"),
-                  Text(globals.testUser.email),
+                  Text(seller.username + " can be contacted at:"),
+                  Text(seller.email),
+                  FlatButton(
+                    child: const Text("OKAY"),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              )
+          ) :  AlertDialog(
+              title: Text("Contact Seller"),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget> [
+                  Text("An error has occured. Could not find a seller for this item."),
                   FlatButton(
                     child: const Text("OKAY"),
                     onPressed: () {
@@ -147,7 +170,7 @@ class ItemDetailState extends State<ItemDetail> {
                 ) : Container(),
                 widget.item.isOBO ?
                 Container(
-                  width: 50,
+                  width: 120,
                   decoration: BoxDecoration(
                       color: colors.teal,
                       borderRadius: BorderRadius.all(
@@ -157,7 +180,7 @@ class ItemDetailState extends State<ItemDetail> {
                   child: Padding(
                     padding: EdgeInsets.all(6),
                     child: Text (
-                      'OBO',
+                      'Or Best Offer',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 16,
