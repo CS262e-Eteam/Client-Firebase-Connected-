@@ -4,6 +4,7 @@ Implements a favorite heart that can be selected/deselected and the fill changes
                       (favorited or not) to initialize the heart to
  */
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -29,6 +30,10 @@ class FavoriteHeartState extends State<FavoriteHeart> {
           } else {
             globals.user.favoritedItems.add(widget.itemId);
           }
+
+          Firestore.instance.collection('users').document(globals.user.reference.documentID).updateData({
+            'favoritedItems': globals.user.favoritedItems
+          });
           setState(() {});
         },
         child: Container(

@@ -736,10 +736,11 @@ class ItemFormState extends State<ItemForm> {
                                 brand: itemBrand.text,
                                 createdDate: Timestamp.now(),
                               ).toJson()
-                          );
-                          Navigator.pop(
-                            context,
-                          );
+                          ).then((doc) {
+                            Navigator.pop(
+                              context,
+                            );
+                          });
                         },
                         child: Container(
                             decoration: BoxDecoration(
