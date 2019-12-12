@@ -10,6 +10,7 @@ import 'package:lab09/pages/filter_list.dart';
 import 'package:lab09/pages/home_page.dart';
 import 'package:lab09/types/item.dart';
 import 'pages/login_page.dart';
+import 'pages/user_settings.dart';
 
 import 'shared/globals.dart' as globals;
 import 'shared/colors.dart' as colors;
