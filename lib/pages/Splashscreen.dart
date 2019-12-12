@@ -36,21 +36,15 @@ class _SplashScreenState extends State<SplashScreen> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Expanded(
-                flex: 2,
-                child: Container(
+                Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                         Image.asset(
-                      'lib/images/calvin.jpg',
-                     height: 450,
-                      width: 700,
-                      alignment: Alignment.center,
-                  ),
-
-
-
+                          'lib/images/calvin.jpg',
+                          width: MediaQuery.of(context).size.width * .8,
+                          alignment: Alignment.center,
+                        ),
                       Padding(
                         padding: EdgeInsets.only(top: 10.0),
                       ),
@@ -64,10 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     ],
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Column(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     CircularProgressIndicator(backgroundColor: Colors.white,),
@@ -84,7 +75,6 @@ class _SplashScreenState extends State<SplashScreen> {
                     )
                   ],
                 ),
-              )
             ],
           )
         ],
