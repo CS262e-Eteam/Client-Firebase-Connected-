@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lab09/pages/edit_item.dart';
 import 'package:lab09/pages/filter_list.dart';
 import 'package:lab09/pages/login_page.dart';
+import 'package:lab09/pages/user_settings.dart';
 
 import 'package:lab09/shared/colors.dart' as colors;
 import 'package:lab09/shared/globals.dart' as globals;
@@ -121,14 +122,19 @@ class MenuTabsState extends State<MenuTabs> {
       ),
     );
 //    } else {
-//      tabs.add(
-//        ListTile(
-//          leading: Icon(FontAwesomeIcons.userCircle),
-//          title: Text('My Account'),
-//          onTap: (){//fucntion we need
-//          },
-//        ),
-//      );
+      tabs.add(
+        ListTile(
+          leading: Icon(FontAwesomeIcons.userCircle),
+          title: Text('My Account'),
+          onTap: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              new MaterialPageRoute(builder: (context) => new UserSettings()),
+            );
+          },
+        ),
+      );
 //
 //      tabs.add(
 //        ListTile(
