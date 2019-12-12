@@ -142,15 +142,17 @@ class MenuTabsState extends State<MenuTabs> {
 //        ),
 //      );
 //
-//      tabs.add(
-//        ListTile(
-//          leading: Icon(FontAwesomeIcons.doorOpen),
-//          title: Text('Logout'),
-//          onTap: (){//fucntion we need
-//            globals.isLoggedIn = false;
-//          },
-//        ),
-//      );
+      tabs.add(
+        ListTile(
+          leading: Icon(FontAwesomeIcons.doorOpen),
+          title: Text('Logout'),
+          onTap: (){//fucntion we need
+            globals.user = null;
+            Navigator.pop(context);
+            Navigator.pop(context);
+          },
+        ),
+      );
 //    }
 
     return tabs;
