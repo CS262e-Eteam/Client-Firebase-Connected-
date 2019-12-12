@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lab09/components/menu_tabs.dart';
 import 'package:lab09/shared/globals.dart' as globals;
 import 'package:lab09/shared/colors.dart' as colors;
 import 'package:lab09/components/summary_card.dart';
@@ -48,9 +49,8 @@ class FilterListState extends State<FilterList> {
             },          
           )
         ],
-        
-        ),
-
+      ),
+      drawer: MenuTabs(),
       body: new GridView.count(
         childAspectRatio: .8,
         primary: false,
