@@ -3,6 +3,7 @@ Login Page - allows a user to log in or navigate to sign up page
  */
 
 import 'package:flutter/material.dart';
+import 'package:lab09/components/menu_tabs.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lab09/shared/colors.dart' as colors;
 
@@ -34,6 +35,7 @@ class LoginPageState extends State<LoginPage> {
 			title: Text("Login"),
 			backgroundColor: colors.grayBlue,
 	  ),
+		drawer: MenuTabs(),
 //		body: Form(
 //			key: _formKey,
 //			child: Column(

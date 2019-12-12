@@ -609,9 +609,10 @@ class ItemFormState extends State<ItemForm> {
 
       return new Scaffold(
           appBar: AppBar(
-            title: Text("New Items"),
+            title: Text("New Item"),
             backgroundColor: colors.grayBlue,
           ),
+
           bottomNavigationBar: Container(
               decoration: const BoxDecoration(
                   border: Border(
