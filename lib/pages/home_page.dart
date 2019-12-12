@@ -8,6 +8,7 @@ import 'package:lab09/components/summary_card.dart';
 import 'package:lab09/pages/search.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
+
 import 'package:lab09/shared/globals.dart' as globals;
 import 'package:lab09/shared/colors.dart' as colors;
 

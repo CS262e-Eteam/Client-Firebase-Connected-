@@ -10,6 +10,7 @@ import 'package:lab09/pages/filter_list.dart';
 import 'package:lab09/pages/home_page.dart';
 import 'package:lab09/types/item.dart';
 import 'pages/login_page.dart';
+import 'package:lab09/pages/Splashscreen.dart';
 
 import 'shared/globals.dart' as globals;
 import 'shared/colors.dart' as colors;
@@ -20,7 +21,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        home: new HomeScreen());
+        theme: new ThemeData(
+          primaryColor: colors.grayBlue,
+          accentColor: colors.grayBlue,
+        ),
+        home: new SplashScreen());
   }
 }
 
