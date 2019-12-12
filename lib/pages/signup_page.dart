@@ -130,6 +130,7 @@ class SignUpPageState extends State<SignUpPage> {
 				Padding(
 					padding: EdgeInsets.symmetric(horizontal: 10),
 					child: TextFormField(
+						obscureText: true,
 						controller: passwordCreate,
 						focusNode: passwordCreateNode,
 						validator: (value) {

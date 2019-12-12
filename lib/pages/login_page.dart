@@ -142,6 +142,7 @@ class LoginPageState extends State<LoginPage> {
 					child: TextFormField(
 						controller: passwordLogin,
 						focusNode: passwordNode,
+						obscureText: true,
 						validator: (value) {
 							if (value.isEmpty) return "Please enter a Password";
 							return null;
